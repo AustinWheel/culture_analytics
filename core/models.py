@@ -22,10 +22,10 @@ sex_options = (
 
 class Actor(models.Model):
     name = models.CharField(max_length=255, blank=True, default='')
-    age = models.IntegerField(default=0, blank=True)
     race = models.CharField(max_length=255, choices=race_options, blank=True, default='')
     sex = models.CharField(max_length=255, choices=sex_options, default='Other', blank=True)
     dialog = models.TextField(blank=True, default='')
+    role = models.CharField(max_length=255, blank=True, default='')
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
