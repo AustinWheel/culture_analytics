@@ -27,6 +27,7 @@ class Actor(models.Model):
     dialog = models.TextField(blank=True, default='')
     role = models.CharField(max_length=255, blank=True, default='')
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE, blank=True, null=True)
+    bio = models.TextField(blank=True, default='')
 
     def __str__(self):
         return self.name
