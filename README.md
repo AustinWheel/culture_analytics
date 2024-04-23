@@ -46,10 +46,13 @@ I did this using the entire dialog from the actor and the number of lines that t
 
 <img src="./data/avg_by_line.png"/>
 
-
 ### Sentiment Analysis
 
-did some sentiment analysis
+Sentiment Analysis is a technique to understand the emotional tone behind a series of words. Given a sentence, a sentiment of 0.88 would mean that the sentence is very positive (ie: "Have an amazing day!!"), while a sentiment of -0.88 would mean that the sentence is very negative (ie: "Don't ever talk to me again").
+
+To calculate sentiment I used the `VADER` sentiment analysis tool to understand the sentiment of the dialog spoken by actors of different. I processed the entire dialog that actors had per role, and grouped this data by the race of the actors. The results are shown in the graph below.
+
+<img src="./data/sentiment.png"/>
 
 ### Topic Modeling
 
