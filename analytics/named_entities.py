@@ -11,7 +11,7 @@ for race, d in data.items():
     for entity, count in d:
         e = entity.lower()
         if len(freq_count.keys()) > 19: break
-        if e=="" or e in ("one","two","three","four","five"): continue
+        if e=="" or e in ("one","two","three","four","five","first","second"): continue
         freq_count[entity] = count
         
     create_cloud(freq_count, f"data/named_entities/{race}")
