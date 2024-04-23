@@ -10,12 +10,13 @@ print('# -----------------------------------------------------------------------
 from core.models import Actor
 from tabulate import tabulate
 import re
+import matplotlib.pyplot as plt
 
-races = set()
+
+races = list()
 all_actors = Actor.objects.all()
 for a in all_actors:
-    if a.race != "" and a.race != "unknown": races.add(a.race)
-races = list(races)
+    if a.race != "" and a.race != "unknown" and a.race not in races: races.append(a.race)
 
 def clean_and_get_count(text):
     re.sub(r'\n', ' ', text)
@@ -43,7 +44,25 @@ for race in races:
     avg_words_cleaned = total_words_cleaned / len(actors)
     data.append([race, avg_words, avg_words_cleaned, max_words])
 
-data.sort(key=lambda x: x[1] + x[2])
+race_data = [ d[0] for d in data ]
+avg_words_data = [ d[1] for d in data ]
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(14, 6))
+plt.bar(race_data, avg_words_data, color=['#c7522a', '#e5c185', '#f0daa5', '#004343', '#008585', '#fbf2c4', '#b8cdab', '#74a892'])
+plt.xlabel('Race')
+plt.ylabel('Average Words per Film')
+plt.title('Actors: Average Words, by Race')
+plt.xticks(rotation=0)
+
+for i, v in enumerate(avg_words_data):
+    word = str(v)[::-1]
+    word = ','.join([word[i:i+3] for i in range(0, len(word), 3)])[::-1]
+    plt.text(i, v+1000, str(word), fontsize=12, fontfamily='monospace', horizontalalignment='center')
+
+plt.savefig('data/avg_dialog')
+
 print(tabulate(data, headers=['Race', 'Average Words', 'Average Words Cleaned', 'Max Words by Single Actor'], tablefmt='orgtbl'))
 print("\n\n")
 
@@ -66,6 +85,22 @@ for race in races:
         lines_spoken += actor.lines_spoken
     data.append([race, total_words / lines_spoken, total_words, lines_spoken])
     
-data.sort(key=lambda x: x[1])
+# data.sort(key=lambda x: x[1])
 print(tabulate(data, headers=["Race", "Average words per line", "Total words spoken", "Lines of dialog"], tablefmt='orgtbl'))
-    
+
+race_data = [ d[0] for d in data ]
+avg_words_data = [ d[1] for d in data ]
+
+plt.figure(figsize=(14, 6))
+plt.bar(race_data, avg_words_data, color=['#c7522a', '#e5c185', '#f0daa5', '#004343', '#008585', '#fbf2c4', '#b8cdab', '#74a892'])
+plt.xlabel('Race')
+plt.ylabel('Average Words per Speech Turn')
+plt.title('Actors: Average Words per Speech Turn, by Race')
+plt.xticks(rotation=0)
+
+for i, v in enumerate(avg_words_data):
+    word = str(v)[::-1]
+    word = ','.join([word[i:i+3] for i in range(0, len(word), 3)])[::-1]
+    plt.text(i, v+1000, str(word), fontsize=12, fontfamily='monospace', horizontalalignment='center')
+
+plt.savefig('data/avg_by_line')
