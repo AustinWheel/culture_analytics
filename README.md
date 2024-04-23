@@ -117,4 +117,10 @@ I used a similar representation strategy for the named entities with a word clou
 ### White word frequency:
 <img src="./data/named_entities/White.png"/>
 
+## Total words by Race
+
+Here I calculated the total number of words that actors of each race said, and the results are shown below.
+
+<img src="./data/total_words_by_race.png"/>
+
 ## Conclusion
