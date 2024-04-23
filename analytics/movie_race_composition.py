@@ -80,7 +80,6 @@ plt.bar(r, bars[5], bottom=bottoms[5], color='#74a892', edgecolor='white', width
 plt.bar(r, bars[6], bottom=bottoms[6], color='#008585', edgecolor='white', width=barWidth, label='South Asian')
 plt.bar(r, bars[7], bottom=bottoms[7], color='#004343', edgecolor='white', width=barWidth, label='East Asian')
 
-# plt.legend(loc='upper left', bbox_to_anchor=(1,1), ncol=1)
 plt.figlegend(bbox_to_anchor=(0.5, 0.75), ncol=1)
 plt.title("Dialog Composition by Race in Movies")
 plt.xticks(r, names, fontweight='bold')

@@ -19,7 +19,7 @@ races = [x[0] for x in all]
 words = [x[1] for x in all]
 
 plt.figure(figsize=(10, 6))
-plt.bar(races, words, color=['#000080', '#0047AB', 'royalblue', 'royalblue', '#0F52BA', '#0F52BA', '#0F52BA'])
+plt.bar(races, words, color=['#c7522a', '#e5c185', '#f0daa5', '#004343', '#008585', '#fbf2c4', '#b8cdab', '#74a892'])
 plt.xlabel('Race')
 plt.ylabel('Total Words')
 plt.title('Actors: Total Words, by Race')
