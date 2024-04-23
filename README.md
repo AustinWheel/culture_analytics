@@ -54,14 +54,29 @@ To calculate sentiment I used the `VADER` sentiment analysis tool to understand 
 
 <img src="./data/sentiment.png"/>
 
-### Topic Modeling
-
-did some topic modeling
-
 ### Frequency Analysis
 
-did some frequency analysis
+What is this?
+Frequency analysis is a technique to understand the frequency of words in a text. Given a series of words, we count the occurence of each word and then sort them by frequency. This is useful to understand the most common words spoken by actors of each race.
+
+The dialog that I used was cleaned with named entities removed. The cleaned version of the dialog was created by removing all the stop/filler words and punctuation from the dialog. 
+
+Additionally, I only considered words that appear less than 15% of the time across the entire dataset. This is done to ensure that we don't see words that everyone uses such as "I", "They", "eat", etc.
+
+Then I selected the top 30 words sorted by frequency. For these top 30 words, I created a word cloud to visualize the frequency of words spoken by actors of each race as well as a bar graph to show the frequencies calculated. The results are shown below.
+
+<img src="./data/Black-wordfreq.png"/>
+<img src="./data/East Asian-wordfreq.png"/>
+<img src="./data/LatinX-wordfreq.png"/>
+<img src="./data/Middle East-wordfreq.png"/>
+<img src="./data/Native American-wordfreq.png"/>
+<img src="./data/Pacific Islander-wordfreq.png"/>
+<img src="./data/Southeast Asian-wordfreq.png"/>
+<img src="./data/White-wordfreq.png"/>
+
 
 ### Named Entity Recognition
 
-did some named entity recognition
+What is this?
+Named Entity Recognition (NER) is a technique to identify named entities in a text. Named entities are real-world objects such as persons, locations, organizations, etc. For this analysis, I used the `spaCy` library to identify named entities in the dialog spoken by actors of different
+
