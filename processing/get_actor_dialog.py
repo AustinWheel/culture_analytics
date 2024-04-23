@@ -25,19 +25,21 @@ def get_actor_dialog(actor, script):
     soup = BeautifulSoup(script, 'html.parser')
     soup = soup.text.split("\n")
     dialog =[]
-
     i = 1
+    lines_spoken = 0
     while i < len(soup):
         line = soup[i].strip()
         pLine = soup[i-1].strip()
         if check_name(line, name) and pLine == "":
             i += 1
+            words_in_line = 0
+            lines_spoken += 1
             while i < len(soup) and soup[i].strip() != "":
                 dialog.append(soup[i].strip())
                 i += 1
         i += 1
     dialog = "\n".join(dialog)
-    
+    actor.lines_spoken = lines_spoken
     actor.dialog = dialog
     actor.save()
 

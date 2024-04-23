@@ -14,7 +14,7 @@ import re
 races = set()
 all_actors = Actor.objects.all()
 for a in all_actors:
-    if a.race != "" and a.race != "Unknown": races.add(a.race)
+    if a.race != "" and a.race != "unknown": races.add(a.race)
 races = list(races)
 
 def clean_and_get_count(text):
@@ -62,10 +62,10 @@ for race in races:
     lines_spoken = 0
     for actor in actors:
         for line in actor.dialog.split("\n"):
-            lines_spoken += 1
             total_words += len(line.split(" "))
+        lines_spoken += actor.lines_spoken
     data.append([race, total_words / lines_spoken, total_words, lines_spoken])
     
 data.sort(key=lambda x: x[1])
-print(tabulate(data, headers=["Race", "Averge words per line", "Total words spoken", "Lines of dialog"], tablefmt='orgtbl'))
+print(tabulate(data, headers=["Race", "Average words per line", "Total words spoken", "Lines of dialog"], tablefmt='orgtbl'))
     

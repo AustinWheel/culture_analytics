@@ -30,6 +30,7 @@ class Actor(models.Model):
     bio = models.TextField(blank=True, default='')
     cleaned = models.TextField(blank=True, default='')
     no_named = models.TextField(blank=True, default='')
+    lines_spoken = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
         return self.name
