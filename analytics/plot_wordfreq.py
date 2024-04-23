@@ -27,5 +27,5 @@ def create_cloud( word_freq: dict, fName ):
     plt.title('Word Frequencies')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
-    plt.savefig(fName+'-wordfreq.png')
+    plt.savefig(fName)
     
