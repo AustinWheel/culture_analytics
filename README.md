@@ -123,4 +123,10 @@ Here I calculated the total number of words that actors of each race said, and t
 
 <img src="./data/total_words_by_race.png"/>
 
+## Movie race composition by dialog percentage
+
+Here, for every race of actors present in a movie, I calculated the percent dialog that the given race had in the movie. For example if a movie has 100 words, and 50 of those are by white actors, the percentage of dialog from white actors would be 50%. The results are shown below.
+
+<img src="./data/movie_race_composition.png"/>
+
 ## Conclusion
