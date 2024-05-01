@@ -1,132 +1,28 @@
-# Culture Analytics of Race depiction in Films
+# Culture Analytics of Race Depiction in Films
+
 ## Introduction
-lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac purus sit amet nisl justo. Donec nec nulla eget urna tincidunt aliquam. Nulla facilisi bibendum
+For an introduction of my reasons to explore this topic, please see the [Blog Post](https://austinwheeler.hashnode.dev/race-in-cinema). This project aims to understand the depiction of race in films by analyzing the dialog spoken by actors of different races and performing different text analysis techniques to find and understand any differences.
 
-<br></br>
 ## Data
-looks lik stuff
 
-### Data Collection
-did some stuff
+Data was scraped from the [IMSDB](https://www.imsdb.com/) website. The IMSDB website is a database of movie scripts that are freely available to the public. I scraped all of the scripts (~1200 movies) from the website. For each movie I scraped the `Top Cast` section from IMDB if there was an IMDB page available. For each actor in the `Top Cast` section, I scraped their Wikipedia page if one was available (For actors who did not immediately have a wikipedia page I manually selected the link during a semi-auto scraping process). With the wikipedia page of the actors I scraped each actor's entire biography. With the biography of the actors I was able to upload this to the `GPT-4-Turbo-Preview` API to identify the race of the actor.
 
-### Data Cleaning
-did some more stuff
+Race could be one of eight values: White, Black, LatinX, Middle Eastern, Southeast Asian, East Asian, Native American, and Pacific Islander. These options come from a paper by Malik et al. "Representation of Racial Minorities in Popular Movies".
 
-## Word Count Analysis
+## Text Analysis
 
-Used two methods for understanding racial depictions using word counts. The first method was to understand the average number of words actors of different races spoke in the films. The second method was to understand the average length of a line that actors of each race spoke in the films. 
+The text analysis methods I used are as follows:
+- Word Count Analysis
+  - Average Number of Words Spoken by Actors.
+  - Average Length of a Speech turn by Actors.
+  - Movie Dialogue Composition by Race.
+  - Total words spoken by Race.
+- Sentiment Analysis
+- Frequency Analysis
+- Named Entity Recognition
 
-### Average Number of Words Spoken by Actors of Different Races
+These are discussed in greater detail in the linked [blog post](https://austinwheeler.hashnode.dev/race-in-cinema)
 
-I first calculated the average number of words spoken by actors of different races based on their dialogs. I did this with the entire dialog and also a cleaned version of the dialog. The cleaned version of the dialog was created by removing all the stop/filler words and punctuation from the dialog. The results are shown in the table below.
+The code for the analytics can be found in the `analytics` directory. The code is written in Python and uses Django for storing and managing the data in SQL. The code for scraping the data can be found in the `scraping` directory. Any data processing and cleaning I did is also found in the `processing` directory. Dependencies are listed in `requirements.txt` and can be installed with `pip install -r requirements.txt`. Documentation for using Django can be found [here](https://docs.djangoproject.com/en/4.0/).
 
-<img src="./data/avg_dialog.png"/>
-
-### Average Length of a Line Spoken by Actors of Different Races
-
-I then calculated the average length of a line spoken by actors. For example given example, Leopard is counted as having one line and 22 words, while Hopps has one line and 13 words: 
-
-```
-LEOPARD
-          C'mon! He bared his teeth first.
-
-We land at the front desk and find CLAWHAUSER, a PUDGY
-CHEETAH COP, happily eating a bowl of Lucky Chomps cereal.
-
-HOPPS (O.C.)
-          Scuse me! Down here? Hi.
-          Clawhauser leans over the desk to find Hopps.
-```
-
-I did this using the entire dialog from the actor and the number of lines that they spoke in the film, then I aggregated this data for the given race of the actor. The results are shown in the table below.
-
-<img src="./data/avg_by_line.png"/>
-
-## Sentiment Analysis
-
-Sentiment Analysis is a technique to understand the emotional tone behind a series of words. Given a sentence, a sentiment of 0.88 would mean that the sentence is very positive (ie: "Have an amazing day!!"), while a sentiment of -0.88 would mean that the sentence is very negative (ie: "Don't ever talk to me again").
-
-To calculate sentiment I used the `VADER` sentiment analysis tool to understand the sentiment of the dialog spoken by actors of different. I processed the entire dialog that actors had per role, and grouped this data by the race of the actors. The results are shown in the graph below.
-
-<img src="./data/sentiment.png"/>
-
-## Frequency Analysis
-
-What is this?
-Frequency analysis is a technique to understand the frequency of words in a text. Given a series of words, we count the occurence of each word and then sort them by frequency. This is useful to understand the most common words spoken by actors of each race.
-
-The dialog that I used was cleaned with named entities removed. The cleaned version of the dialog was created by removing all the stop/filler words and punctuation from the dialog. 
-
-Additionally, I only considered words that appear less than 15% of the time across the entire dataset. This is done to ensure that we don't see words that everyone uses such as "I", "They", "eat", etc.
-
-Then I selected the top 30 words sorted by frequency. For these top 30 words, I created a word cloud to visualize the frequency of words spoken by actors of each race as well as a bar graph to show the frequencies calculated. The results are shown below.
-
-### Black word frequency:
-<img src="./data/Black-wordfreq.png"/>
-
-### East Asian word frequency:
-<img src="./data/East Asian-wordfreq.png"/>
-
-### LatinX word frequency:
-<img src="./data/LatinX-wordfreq.png"/>
-
-### Middle East word frequency:
-<img src="./data/Middle East-wordfreq.png"/>
-
-### Native American word frequency:
-<img src="./data/Native American-wordfreq.png"/>
-
-### Pacific Islander word frequency:
-<img src="./data/Pacific Islander-wordfreq.png"/>
-
-### Asian word frequency:
-<img src="./data/Southeast Asian-wordfreq.png"/>
-
-### White word frequency:
-<img src="./data/White-wordfreq.png"/>
-
-
-## Named Entity Recognition
-
-What is this?
-Named Entity Recognition (NER) is a technique to identify named entities in a text. Named entities are real-world objects such as persons, locations, organizations, etc. For this analysis, I used the `spaCy` library to identify named entities in the dialog spoken by actors of different
-
-I used a similar representation strategy for the named entities with a word cloud and bar graph of the frequencies. The results are shown below.
-
-### Black word frequency:
-<img src="./data/named_entities/Black.png"/>
-
-### East Asian word frequency:
-<img src="./data/named_entities/East Asian.png"/>
-
-### LatinX word frequency:
-<img src="./data/named_entities/LatinX.png"/>
-
-### Middle East word frequency:
-<img src="./data/named_entities/Middle East.png"/>
-
-### Native American word frequency:
-<img src="./data/named_entities/Native American.png"/>
-
-### Pacific Islander word frequency:
-<img src="./data/named_entities/Pacific Islander.png"/>
-
-### Asian word frequency:
-<img src="./data/named_entities/Southeast Asian.png"/>
-
-### White word frequency:
-<img src="./data/named_entities/White.png"/>
-
-## Total words by Race
-
-Here I calculated the total number of words that actors of each race said, and the results are shown below.
-
-<img src="./data/total_words_by_race.png"/>
-
-## Movie race composition by dialog percentage
-
-Here, for every race of actors present in a movie, I calculated the percent dialog that the given race had in the movie. For example if a movie has 100 words, and 50 of those are by white actors, the percentage of dialog from white actors would be 50%. The results are shown below.
-
-<img src="./data/movie_race_composition.png"/>
-
-## Conclusion
+I can provide a dump of the data that I scraped if you reach out to me at austinwheeler1112@gmail.com
